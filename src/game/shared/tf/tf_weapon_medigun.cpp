@@ -602,9 +602,8 @@ bool CWeaponMedigun::AllowedToHealTarget( CBaseEntity *pTarget )
 		if ( !pTarget->InSameTeam( pOwner ) )
 			return false;
 
-		if ( pTarget->IsBaseObject() )
-			return false;
-
+		if ( pTarget->IsBaseObject() && IsAllowedToTargetBuildings() )
+			return true;
 		CTFReviveMarker *pReviveMarker = dynamic_cast< CTFReviveMarker* >( pTarget );
 		if ( pReviveMarker )
 		{
@@ -903,7 +902,19 @@ medigun_resist_types_t CWeaponMedigun::GetResistType() const
 //-----------------------------------------------------------------------------
 bool CWeaponMedigun::IsAllowedToTargetBuildings( void )
 {
+	return true; // returns true early here for testing purposes atm
+#ifdef STAGING_ONLY
+	if ( !TFGameRules() || !TFGameRules()->GameModeUsesUpgrades() )
+		return false;
+
+	// See if we have the upgrade to heal buildings
+	int iHealBuildings = 0;
+	CALL_ATTRIB_HOOK_INT( iHealBuildings, medic_machinery_beam );
+
+	return iHealBuildings ? true : false;
+#else	
 	return false;
+#endif // STAGING_ONLY
 }
 
 //-----------------------------------------------------------------------------
@@ -961,6 +972,19 @@ void CWeaponMedigun::HealTargetThink( void )
 
 	if ( !pTarget->IsPlayer() )
 	{
+		if ( IsAttachedToBuilding() )
+		{
+			// Heal building
+			if ( m_hHealingTarget->GetHealth() < m_hHealingTarget->GetMaxHealth() )
+			{
+				CBaseEntity *pEntity = m_hHealingTarget;
+				CBaseObject *pObject = dynamic_cast<CBaseObject*>( pEntity );
+				if ( pObject )
+				{
+					pObject->SetHealth( m_hHealingTarget->GetHealth() + ( GetHealRate() / 10.f ) );
+				}
+			}
+		}
 
 		CTFReviveMarker *pReviveMarker = dynamic_cast< CTFReviveMarker* >( pTarget );
 		if ( pReviveMarker )

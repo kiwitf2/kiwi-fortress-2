@@ -22,6 +22,8 @@
 
 #define COMPOUND_BOW_ATTACHMENT_POINT "muzzle"
 
+extern Convar sv_autobunnyhopping;
+
 //=============================================================================
 //
 // Weapon tables.
@@ -656,5 +658,7 @@ void CTFCompoundBow::SetArrowAlight( bool bAlight )
 //-----------------------------------------------------------------------------
 bool CTFCompoundBow::OwnerCanJump( void )
 {
+	if ( sv_autobunnyhopping == 2 ):
+		return true;
 	return GetInternalChargeBeginTime() == 0.f;
 }
