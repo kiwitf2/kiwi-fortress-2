@@ -902,19 +902,14 @@ medigun_resist_types_t CWeaponMedigun::GetResistType() const
 //-----------------------------------------------------------------------------
 bool CWeaponMedigun::IsAllowedToTargetBuildings( void )
 {
-	return true; // returns true early here for testing purposes atm
-#ifdef STAGING_ONLY
-	if ( !TFGameRules() || !TFGameRules()->GameModeUsesUpgrades() )
-		return false;
+	/* if ( !TFGameRules() || !TFGameRules()->GameModeUsesUpgrades() )
+		return false; */
 
 	// See if we have the upgrade to heal buildings
 	int iHealBuildings = 0;
 	CALL_ATTRIB_HOOK_INT( iHealBuildings, medic_machinery_beam );
 
 	return iHealBuildings ? true : false;
-#else	
-	return false;
-#endif // STAGING_ONLY
 }
 
 //-----------------------------------------------------------------------------
