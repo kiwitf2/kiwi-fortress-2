@@ -22,7 +22,7 @@
 
 #define COMPOUND_BOW_ATTACHMENT_POINT "muzzle"
 
-extern Convar sv_autobunnyhopping;
+extern ConVar sv_autobunnyhopping;
 
 //=============================================================================
 //
@@ -658,7 +658,7 @@ void CTFCompoundBow::SetArrowAlight( bool bAlight )
 //-----------------------------------------------------------------------------
 bool CTFCompoundBow::OwnerCanJump( void )
 {
-	if ( sv_autobunnyhopping == 2 ):
+	if ( sv_autobunnyhopping.GetInt() == 2 )
 		return true;
 	return GetInternalChargeBeginTime() == 0.f;
 }
