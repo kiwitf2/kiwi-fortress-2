@@ -222846,11 +222846,11 @@
 			"hidden"			"1"
 			"stored_as_integer"	"1"
 		}
-		"3019"
+		"483"
 		{
 			"name"	"medic_machinery_beam"
 			"attribute_class"	"medic_machinery_beam"
-			"description_string"	"#Attrib_TurnToGold"
+			"description_string"	"#Attrib_MedicMachineryBeam"
 			"description_format"	"value_is_additive"
 			"hidden"	"0"
 			"effect_type"	"positive"
