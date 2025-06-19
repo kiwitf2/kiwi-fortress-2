@@ -2403,6 +2403,9 @@ BEGIN_ENT_SCRIPTDESC_ROOT( CBaseEntity, "Root class of all server-side entities"
 
 	DEFINE_SCRIPTFUNC_NAMED( ScriptGetSolid, "GetSolid", "" )
 	DEFINE_SCRIPTFUNC_NAMED( ScriptSetSolid, "SetSolid", "" )
+
+	DEFINE_SCRIPTFUNC_NAMED( ScriptMakePhysics, "MakePhysical", "Give the entity Physics" )
+	DEFINE_SCRIPTFUNC_NAMED( ScriptDestroyPhysics, "DestroyPhysics", "Remove the entity Physics" )
 	
 	DEFINE_SCRIPTFUNC( TerminateScriptScope, "Clear the current script scope for this entity" )
 
