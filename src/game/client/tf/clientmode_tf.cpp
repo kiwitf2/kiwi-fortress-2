@@ -2096,7 +2096,7 @@ void ClientModeTFNormal::UpdateSteamRichPresence() const
 	{
 		// If they have an MM match, or if they're just on the menus, direct joiners to join their party, they cannot
 		// join the server directly.
-		CFmtStr strConnect( "+tf_party_request_join_user %llu",
+		CFmtStr strConnect( "+tf_party_request_join_user %llu 0",
 		                    steamapicontext->SteamUser()->GetSteamID().ConvertToUint64() );
 
 		engine->SetRichPresenceConnect( strConnect );
